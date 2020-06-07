@@ -1,0 +1,1 @@
+ java -cp semanticvectors-5.9.jar:lucene-core-6.6.0-SNAPSHOT.jar pitt.search.semanticvectors.Search -elementalvectorfile elementalvectors.bin -semanticvectorfile semanticvectors.bin  -elementalpredicatevectorfile predicatevectors.bin  -matchcase -searchvectorfile elementalvectors.bin -searchtype boundproduct -numsearchresults $3 "S($1)*P(TREATS)+S($2)*P(CAUSES-INV)"
