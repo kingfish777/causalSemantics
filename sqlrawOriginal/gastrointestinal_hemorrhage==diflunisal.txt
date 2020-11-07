@@ -1,0 +1,4 @@
+rheumatoid_arthritis
+degenerative_polyarthritis
+amyloidosis
+fibrosis

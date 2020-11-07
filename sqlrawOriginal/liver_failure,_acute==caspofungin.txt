@@ -1,0 +1,6 @@
+infection
+hematologic_neoplasms
+acute_leukemia
+necrosis
+inflammation
+shock

@@ -1,0 +1,14 @@
+congestive_heart_failure
+adverse_effects
+cardiomyopathies
+reperfusion_injury
+fibrosis
+ischemia
+inflammation
+lack_of_sensation
+physical_findings
+infarction
+stenosis
+hepatolenticular_degeneration
+necrosis
+shock

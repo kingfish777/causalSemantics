@@ -1,0 +1,14 @@
+fibrosis
+infection
+primary_carcinoma_of_the_liver_cells
+virus_diseases
+lymphoma
+polyarteritis_nodosa
+chronic_liver_disease_nos
+tuberculosis
+vasculitis
+adverse_event
+kidney_failure,_chronic
+esophageal_varices
+pancreatitis,_chronic
+ascites

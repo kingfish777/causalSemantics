@@ -1,0 +1,6 @@
+rheumatoid_arthritis
+degenerative_polyarthritis
+adverse_event
+thrombocytopenia
+gastric_ulcer
+pancreatitis

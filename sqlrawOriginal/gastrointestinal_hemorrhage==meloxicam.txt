@@ -1,0 +1,8 @@
+degenerative_polyarthritis
+rheumatoid_arthritis
+infection
+primary_carcinoma_of_the_liver_cells
+neoplasm
+colitis
+ischemia
+wounds_and_injuries

@@ -1,0 +1,15 @@
+rheumatoid_arthritis
+degenerative_polyarthritis
+hemorrhage
+peptic_ulcer
+heart_failure
+intestinal_diseases
+ulcer
+pancreatitis,_chronic
+stomach_diseases
+colitis
+gastric_mucosal_lesion
+infection
+adverse_event
+helicobacter_pylori
+wounds_and_injuries

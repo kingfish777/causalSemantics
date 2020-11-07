@@ -1,0 +1,16 @@
+myocardial_infarction
+hemorrhage
+cardiovascular_diseases
+adverse_event
+vascular_diseases
+heart_failure
+kidney_failure,_chronic
+peptic_ulcer
+thrombocytopenia
+ischemia
+gastrointestinal_hemorrhage
+dieulafoy's_vascular_malformation
+ulcer
+pulmonary_embolism
+ulcerative_colitis
+wounds_and_injuries

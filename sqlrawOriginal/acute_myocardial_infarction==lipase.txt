@@ -1,0 +1,8 @@
+pancreatitis
+coronary_arteriosclerosis
+atherosclerosis
+wounds_and_injuries
+diabetes
+infection
+inflammation
+acute_coronary_syndrome

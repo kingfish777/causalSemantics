@@ -1,0 +1,16 @@
+infection
+septicemia
+pneumonia
+mixed_infectious_disease
+bacterial_infections
+appendicitis
+subacute_bacterial_endocarditis
+colitis
+poisoning
+actinomycosis
+carcinoma
+helicobacter_infections
+rheumatoid_arthritis
+ulcer
+anemia
+typhoid_fever

@@ -1,0 +1,15 @@
+inflammation
+hypertensive_disease
+kidney_failure
+adverse_effects
+muscle_injury
+spasm
+heart_failure
+renal_impairment
+dehydration
+infection
+wounds_and_injuries
+colitis
+end_stage_renal_failure
+endometriosis,_site_unspecified
+nephritis

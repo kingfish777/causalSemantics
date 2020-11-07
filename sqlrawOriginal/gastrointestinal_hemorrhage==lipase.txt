@@ -1,0 +1,9 @@
+pancreatitis
+kidney_failure,_chronic
+ascites
+pancreatitis,_chronic
+maximum
+wounds_and_injuries
+peptic_ulcer
+infection
+tuberculosis

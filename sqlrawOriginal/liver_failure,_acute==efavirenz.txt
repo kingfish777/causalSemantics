@@ -1,0 +1,10 @@
+tuberculosis
+virus
+adverse_effects
+hepatotoxicity
+hepatitis_b_virus
+infection
+hepatitis
+virus_diseases
+liver_diseases
+fibrosis

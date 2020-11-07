@@ -1,0 +1,6 @@
+rheumatoid_arthritis
+degenerative_polyarthritis
+chronic_lymphocytic_leukemia
+hemorrhage
+neoplasm
+colitis

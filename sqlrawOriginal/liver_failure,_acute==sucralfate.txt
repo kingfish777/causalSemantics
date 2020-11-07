@@ -1,0 +1,4 @@
+adverse_effects
+physical_findings
+ischemia
+inflammation

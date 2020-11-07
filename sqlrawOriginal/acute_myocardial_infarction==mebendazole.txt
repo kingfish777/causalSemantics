@@ -1,0 +1,2 @@
+infection
+adverse_effects

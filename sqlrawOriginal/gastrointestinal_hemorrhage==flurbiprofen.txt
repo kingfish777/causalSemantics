@@ -1,0 +1,6 @@
+rheumatoid_arthritis
+degenerative_polyarthritis
+wounds_and_injuries
+hypertension,_portal
+cerebral_ischemia
+hemorrhage

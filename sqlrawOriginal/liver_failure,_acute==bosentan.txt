@@ -1,0 +1,7 @@
+ischemia
+adverse_effects
+fibrosis
+congestive_heart_failure
+reperfusion_injury
+adenoviruses
+inflammation

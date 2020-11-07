@@ -1,0 +1,13 @@
+panic_disorder
+adverse_effects
+cardiac_arrhythmia
+chest_pain
+tachycardia,_ventricular
+heart_diseases
+cocaine_abuse
+hypertensive_disease
+myocardial_infarction
+congestive_heart_failure
+overdose
+poisoning
+ventricular_fibrillation

@@ -1,0 +1,5 @@
+infection
+candidiasis_of_the_esophagus
+ulcer
+anemia
+helicobacter_pylori

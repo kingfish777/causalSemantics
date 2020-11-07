@@ -1,0 +1,3 @@
+rheumatoid_arthritis
+degenerative_polyarthritis
+ascites

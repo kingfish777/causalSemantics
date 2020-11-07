@@ -1,0 +1,13 @@
+fibrosis
+myocardial_infarction
+pancreatitis
+cardiovascular_diseases
+kidney_failure,_chronic
+colitis
+heart_failure
+lupus_erythematosus,_systemic
+septicemia
+gastric_ulcer
+neoplasm
+neoplasm_metastasis
+adverse_event

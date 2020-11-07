@@ -1,0 +1,13 @@
+fibrosis
+inflammation
+oxidative_stress
+fatty_liver
+reperfusion_injury
+congestive_heart_failure
+liver_damage
+hepatitis
+neoplasm_metastasis
+liver_diseases
+adverse_effects
+chronic_liver_disease_nos
+hepatitis_c_virus

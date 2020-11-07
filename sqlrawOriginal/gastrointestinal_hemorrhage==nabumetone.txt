@@ -1,0 +1,5 @@
+degenerative_polyarthritis
+rheumatoid_arthritis
+adverse_event
+ulcer
+duodenal_ulcer

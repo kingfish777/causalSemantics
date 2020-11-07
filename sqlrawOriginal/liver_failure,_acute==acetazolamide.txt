@@ -1,0 +1,7 @@
+physical_findings
+sickle_cell_anemia
+congestive_heart_failure
+hepatotoxicity
+poisoning
+liver_diseases
+adverse_effects

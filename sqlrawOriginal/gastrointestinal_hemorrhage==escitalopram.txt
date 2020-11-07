@@ -1,0 +1,2 @@
+alcoholic_intoxication,_chronic
+adverse_event

@@ -1,0 +1,13 @@
+infection
+candidiasis_of_the_esophagus
+disseminated_intravascular_coagulation
+hypercalcemia
+carcinoma
+neoplasm_metastasis
+pneumonia
+small_cell_carcinoma_of_lung
+neoplasm
+pancreatitis
+tuberculosis
+adverse_event
+blood_coagulation_disorders

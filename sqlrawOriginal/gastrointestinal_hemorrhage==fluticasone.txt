@@ -1,0 +1,5 @@
+esophagitis
+infection
+pneumonia
+adverse_event
+ulcerative_colitis

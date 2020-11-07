@@ -1,0 +1,15 @@
+stress
+alcoholic_intoxication,_chronic
+adverse_event
+fibrosis
+hyperactive_behavior
+maximum
+pneumonia
+hemorrhage
+neoplasm
+thrombocytopenia
+blood_coagulation_disorders
+helicobacter_pylori
+poisoning
+upper_gastrointestinal_hemorrhage
+wounds_and_injuries

@@ -1,0 +1,5 @@
+congestive_heart_failure
+physical_findings
+fibrosis
+inflammation
+reperfusion_injury

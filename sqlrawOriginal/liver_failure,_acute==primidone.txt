@@ -1,0 +1,3 @@
+adverse_effects
+drug_toxicity
+acute_viral_hepatitis

@@ -1,0 +1,14 @@
+hepatolenticular_degeneration
+adverse_effects
+poisoning
+fibrosis
+hepatitis,_chronic_active
+chronic_liver_disease_nos
+hepatomegaly
+hepatotoxicity
+infection
+liver_damage
+hepatitis
+cholestasis,_intrahepatic
+chronic_lymphocytic_leukemia
+fulminant_wilson's_disease

@@ -1,0 +1,14 @@
+acne
+ischemia
+adverse_effects
+fibrosis
+inflammation
+tuberculosis
+hepatotoxicity
+virus
+congestive_heart_failure
+neoplasm_metastasis
+liver_diseases
+necrosis
+metabolic_diseases
+reperfusion_injury

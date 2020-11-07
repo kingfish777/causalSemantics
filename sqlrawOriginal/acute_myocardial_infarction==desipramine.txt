@@ -1,0 +1,7 @@
+cocaine_abuse
+panic_disorder
+adverse_effects
+hypertensive_disease
+ischemia
+pheochromocytoma
+congestive_heart_failure

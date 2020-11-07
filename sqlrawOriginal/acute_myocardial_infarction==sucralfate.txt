@@ -1,0 +1,6 @@
+helicobacter_pylori
+adverse_effects
+physical_findings
+ischemia
+inflammation
+wounds_and_injuries

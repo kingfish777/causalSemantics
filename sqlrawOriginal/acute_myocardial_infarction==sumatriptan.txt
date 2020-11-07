@@ -1,0 +1,6 @@
+chest_pain
+coronary_artery_vasospasm
+coronary_arteriosclerosis
+myocardial_ischemia
+angina_pectoris,_variant
+myocardial_infarction

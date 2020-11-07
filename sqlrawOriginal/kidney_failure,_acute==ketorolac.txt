@@ -1,0 +1,12 @@
+inflammation
+hypersensitivity
+spasm
+hyperkalemia
+edema
+fibrosis
+hemolytic-uremic_syndrome
+reperfusion_injury
+thrombosis
+adverse_effects
+extravasation
+hernia

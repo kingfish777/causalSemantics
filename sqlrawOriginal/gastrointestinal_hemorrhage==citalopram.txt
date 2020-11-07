@@ -1,0 +1,4 @@
+alcoholic_intoxication,_chronic
+stress
+adverse_event
+poisoning

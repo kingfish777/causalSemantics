@@ -1,0 +1,15 @@
+neoplasm
+adverse_effects
+hypertensive_disease
+heart_failure
+diabetes
+cocaine_abuse
+lymphoma,_non-hodgkin's
+physical_findings
+congestive_heart_failure
+kidney_failure,_acute
+thrombus
+atherosclerosis
+vasospasm
+pheochromocytoma
+tachycardia,_ventricular

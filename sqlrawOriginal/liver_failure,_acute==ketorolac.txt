@@ -1,0 +1,7 @@
+inflammation
+fibrosis
+lack_of_sensation
+physical_findings
+sickle_cell_anemia
+adverse_effects
+reperfusion_injury

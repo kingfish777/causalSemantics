@@ -1,0 +1,11 @@
+infection
+hepatitis_c_virus
+hepatitis_b,_chronic
+virus
+tuberculosis
+disease_progression
+fatty_liver
+associated_disease
+hepatitis,_autoimmune
+hepatitis_c
+adverse_effects

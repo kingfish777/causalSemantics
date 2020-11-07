@@ -1,0 +1,13 @@
+neoplasm
+kidney_failure,_acute
+pancreatitis
+inflammation
+inactivation
+coronary_arteriosclerosis
+hypertensive_disease
+myocardial_infarction
+thrombosis
+ischemia
+unstable_angina
+infection
+anaphylaxis

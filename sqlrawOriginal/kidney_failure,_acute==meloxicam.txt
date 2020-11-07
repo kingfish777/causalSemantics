@@ -1,0 +1,17 @@
+inflammation
+adverse_effects
+infection
+end_stage_renal_failure
+renal_impairment
+rhabdomyolysis
+ischemia
+reperfusion_injury
+kidney_diseases
+ureteral_obstruction
+wounds_and_injuries
+cell_injury
+hypersensitivity
+neoplasm
+renal_glomerular_disease
+colitis
+solid_tumor

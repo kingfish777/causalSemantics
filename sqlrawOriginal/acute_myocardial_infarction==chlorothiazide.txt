@@ -1,0 +1,17 @@
+hypertensive_disease
+congestive_heart_failure
+heart_failure
+kidney_diseases
+diabetes
+myocardial_infarction
+hyperkalemia
+adverse_effects
+coronary_arteriosclerosis
+inflammation
+kidney_failure,_acute
+atherosclerosis
+ischemia
+cardiac_arrhythmia
+thyrotoxicosis
+infarction
+disease_progression

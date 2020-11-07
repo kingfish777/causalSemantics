@@ -1,0 +1,7 @@
+lack_of_sensation
+poisoning
+congestive_heart_failure
+adverse_effects
+ischemia
+inflammation
+shock

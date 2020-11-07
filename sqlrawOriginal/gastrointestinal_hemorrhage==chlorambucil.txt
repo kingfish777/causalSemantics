@@ -1,0 +1,12 @@
+chronic_lymphocytic_leukemia
+lymphoma
+rheumatoid_arthritis
+sarcoidosis
+neoplasm
+helicobacter_pylori
+lupus_erythematosus,_systemic
+amyloidosis
+anemia
+b-cell_lymphomas
+bullous_pemphigoid
+thrombocytopenia

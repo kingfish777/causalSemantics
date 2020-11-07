@@ -1,0 +1,4 @@
+adverse_effects
+poisoning
+overdose
+kidney_failure,_chronic

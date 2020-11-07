@@ -1,0 +1,10 @@
+adverse_effects
+inflammation
+reperfusion_injury
+anemia
+pancreatitis
+pheochromocytoma
+anaphylaxis
+angina_pectoris
+myocardial_infarction
+neoplasm

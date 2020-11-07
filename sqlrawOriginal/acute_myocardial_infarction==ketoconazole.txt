@@ -1,0 +1,11 @@
+infection
+hypertensive_disease
+physical_findings
+adverse_effects
+hypercalcemia
+disease_progression
+hypercholesterolemia,_familial
+cocaine_abuse
+thyrotoxicosis
+anaphylaxis
+neoplasm

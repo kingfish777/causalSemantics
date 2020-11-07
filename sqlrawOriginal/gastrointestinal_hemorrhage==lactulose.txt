@@ -1,0 +1,8 @@
+fibrosis
+inflammatory_bowel_diseases
+kidney_failure,_chronic
+hepatic_coma
+crohn's_disease
+diverticulosis
+pancreatitis
+ulcerative_colitis

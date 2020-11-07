@@ -1,0 +1,9 @@
+fibrosis
+kidney_failure,_chronic
+diarrhea
+inflammation
+shock
+pancreatitis
+adverse_effects
+diarrheal_disorder
+heart_failure

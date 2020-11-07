@@ -1,0 +1,9 @@
+infection
+helicobacter_pylori
+helicobacter_infections
+gastritis
+infection,_h_pylori
+septicemia
+duodenal_ulcer
+ulcer
+gastric_erosions

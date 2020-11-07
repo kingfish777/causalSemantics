@@ -1,0 +1,4 @@
+alcoholic_intoxication,_chronic
+adverse_event
+heart_failure
+wounds_and_injuries

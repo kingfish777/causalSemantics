@@ -1,0 +1,8 @@
+infection
+scrub_typhus
+tuberculosis
+physical_findings
+acute_infectious_disease
+liver_diseases
+leptospirosis
+hematologic_neoplasms

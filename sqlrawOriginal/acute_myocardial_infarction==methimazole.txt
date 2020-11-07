@@ -1,0 +1,7 @@
+thyrotoxicosis
+adverse_effects
+oxidative_stress
+reperfusion_injury
+thyroiditis
+anemia
+congestive_heart_failure

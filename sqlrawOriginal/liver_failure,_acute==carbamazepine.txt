@@ -1,0 +1,14 @@
+adverse_effects
+poisoning
+alcoholic_withdrawal_symptoms
+overdose
+neuroleptic_malignant_syndrome
+hepatotoxicity
+drug_toxicity
+physical_findings
+congestive_heart_failure
+ischemia
+acute_hepatitis
+abuse
+cerebral_edema
+chronic_lymphocytic_leukemia

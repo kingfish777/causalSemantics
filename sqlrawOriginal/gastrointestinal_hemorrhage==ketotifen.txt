@@ -1,0 +1,6 @@
+ulcerative_colitis
+colitis
+bleeding_ulcer
+hypertension,_portal
+infection
+ascites

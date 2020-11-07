@@ -1,0 +1,17 @@
+chronic_obstructive_airway_disease
+cerebrovascular_disorders
+hypoxia
+pathological_dilatation
+physical_findings
+congestive_heart_failure
+kidney_diseases
+coronary_arteriosclerosis
+vasospasm
+stenosis,_unspecified
+myocardial_ischemia
+cardiac_arrhythmia
+heart_failure
+ventricular_fibrillation
+disease_progression
+stenosis
+wounds_and_injuries

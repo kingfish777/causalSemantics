@@ -1,0 +1,9 @@
+infection
+candidiasis_of_the_esophagus
+pneumonia
+ulcer
+lupus_erythematosus,_systemic
+neoplasm
+mucormycosis
+tuberculosis
+adverse_event

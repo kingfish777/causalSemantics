@@ -1,0 +1,3 @@
+infection
+bacterial_infections
+gastritis

@@ -1,0 +1,10 @@
+kidney_failure,_chronic
+heart_failure
+malignant_neoplasm_of_lung
+solid_tumor
+chronic_kidney_insufficiency
+adverse_effects
+hypoxia
+abnormal_renal_function
+chronic_lymphocytic_leukemia
+small_cell_carcinoma_of_lung

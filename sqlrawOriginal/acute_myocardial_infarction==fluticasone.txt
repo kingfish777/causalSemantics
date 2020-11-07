@@ -1,0 +1,4 @@
+chronic_obstructive_airway_disease
+inflammation
+adverse_effects
+infection

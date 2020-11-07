@@ -1,0 +1,8 @@
+hepatotoxicity
+adverse_effects
+oxidative_stress
+reperfusion_injury
+hepatic_encephalopathy
+congestive_heart_failure
+liver_damage
+hepatitis

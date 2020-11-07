@@ -1,0 +1,6 @@
+kidney_failure,_acute
+inflammation
+spasm
+hyperkalemia
+physical_findings
+thrombosis

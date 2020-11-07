@@ -1,0 +1,8 @@
+myocardial_infarction
+heart_failure
+congestive_heart_failure
+adverse_effects
+poisoning
+ischemia
+coronary_heart_disease
+inflammation

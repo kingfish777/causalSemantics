@@ -1,0 +1,3 @@
+co-morbid_conditions
+infection
+adverse_event

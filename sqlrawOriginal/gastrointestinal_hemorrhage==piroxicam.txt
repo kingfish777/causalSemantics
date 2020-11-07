@@ -1,0 +1,7 @@
+degenerative_polyarthritis
+rheumatoid_arthritis
+carcinoma,_transitional_cell
+squamous_cell_carcinoma
+neoplasm
+lupus_erythematosus,_systemic
+ulcer

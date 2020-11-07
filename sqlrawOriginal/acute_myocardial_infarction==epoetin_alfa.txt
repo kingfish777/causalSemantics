@@ -1,0 +1,11 @@
+anemia
+wounds_and_injuries
+heart_failure
+diabetes
+thrombosis
+neoplasm
+adverse_effects
+hypertensive_disease
+inflammation
+congestive_heart_failure
+hyperkalemia

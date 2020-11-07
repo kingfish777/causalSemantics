@@ -1,0 +1,5 @@
+diabetes
+hypertensive_disease
+acute_coronary_syndrome
+adverse_effects
+coronary_arteriosclerosis

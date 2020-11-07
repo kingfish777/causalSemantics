@@ -1,0 +1,11 @@
+propionibacterium_acnes
+hepatolenticular_degeneration
+infection
+virus
+acute_infectious_disease
+necrosis
+dengue_hemorrhagic_fever
+adverse_effects
+chronic_liver_disease_nos
+inflammation
+tuberculosis

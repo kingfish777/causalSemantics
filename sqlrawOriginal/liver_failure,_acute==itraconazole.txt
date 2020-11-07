@@ -1,0 +1,16 @@
+infection
+hematologic_neoplasms
+acute_leukemia
+adverse_effects
+shock
+physical_findings
+acute_infectious_disease
+liver_damage
+disease_progression
+congestive_heart_failure
+hepatitis
+embolism
+fibrosis
+inflammation
+lymphoma
+tuberculosis

@@ -1,0 +1,6 @@
+panic_disorder
+myocardial_ischemia
+diabetes
+adverse_effects
+cardiac_arrhythmia
+overdose

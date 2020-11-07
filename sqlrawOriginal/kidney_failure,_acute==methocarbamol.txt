@@ -1,0 +1,4 @@
+tetanus
+spasm
+poisoning
+wounds_and_injuries

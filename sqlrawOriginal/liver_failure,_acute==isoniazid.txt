@@ -1,0 +1,16 @@
+tuberculosis
+infection
+hepatotoxicity
+adverse_effects
+hepatitis
+liver_damage
+physical_findings
+viral_hepatitis
+liver_diseases
+liver_cirrhosis
+septic_shock
+poisoning
+hepatitis_fulminant
+acute_hepatitis
+fibrosis
+inflammation

@@ -1,0 +1,7 @@
+infection
+adverse_effects
+acute_infectious_disease
+acute_hepatitis
+chronic_liver_disease_nos
+fibrosis
+shock

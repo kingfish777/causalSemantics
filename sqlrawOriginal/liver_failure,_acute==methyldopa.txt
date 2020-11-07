@@ -1,0 +1,4 @@
+hepatitis,_chronic_active
+lack_of_sensation
+adverse_effects
+fibrosis

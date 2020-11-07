@@ -1,0 +1,10 @@
+anemia
+kidney_failure,_chronic
+wounds_and_injuries
+heart_failure
+adverse_event
+anemia;_profound
+neoplasm
+small_cell_carcinoma_of_lung
+blood_coagulation_disorders
+chronic_anemia

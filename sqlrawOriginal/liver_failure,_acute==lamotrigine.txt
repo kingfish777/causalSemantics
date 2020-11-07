@@ -1,0 +1,8 @@
+adverse_effects
+hepatotoxicity
+overdose
+physical_findings
+multiple_organ_failure
+icterus
+ischemia
+drug-induced_hypersensitivity_syndrome

@@ -1,0 +1,10 @@
+pancreatitis
+ascites
+pancreatitis,_chronic
+kidney_failure,_chronic
+lupus_erythematosus,_systemic
+neoplasm
+pancreatic_pseudocyst
+poisoning
+ulcerative_colitis
+wounds_and_injuries

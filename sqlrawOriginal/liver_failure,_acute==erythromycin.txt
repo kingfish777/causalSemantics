@@ -1,0 +1,15 @@
+infection
+acne
+adverse_effects
+acute_infectious_disease
+inflammation
+propionibacterium_acnes
+physical_findings
+melanoma
+cardiomyopathies
+malaria,_falciparum
+liver_diseases
+leptospirosis
+multiple_organ_failure
+reperfusion_injury
+tuberculosis

@@ -1,0 +1,5 @@
+myocardial_infarction
+poisoning
+heart_failure
+duodenal_ulcer
+ischemia

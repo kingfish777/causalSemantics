@@ -1,0 +1,8 @@
+congestive_heart_failure
+adverse_effects
+ischemia
+infarction
+fibrosis
+liver_cirrhosis
+infection
+shock

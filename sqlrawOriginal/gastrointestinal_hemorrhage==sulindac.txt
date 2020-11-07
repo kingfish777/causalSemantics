@@ -1,0 +1,14 @@
+rheumatoid_arthritis
+degenerative_polyarthritis
+fibromatosis,_aggressive
+neoplasm
+adenoma
+helicobacter_pylori
+fibrosis
+inflammatory_bowel_diseases
+hemorrhage
+pancreatitis
+acute_gastritis
+adverse_event
+ascites
+tumor_cell_invasion

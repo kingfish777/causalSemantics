@@ -1,0 +1,12 @@
+adverse_effects
+inflammation
+fibrosis
+overdose
+shock
+liver_cirrhosis
+malaria,_falciparum
+suicide_attempt
+infection
+liver_damage
+chronic_lymphocytic_leukemia
+genital_herpes

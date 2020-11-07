@@ -1,0 +1,10 @@
+echinococcosis
+infection_by_trichuris_trichiura
+helminthiasis
+ascariasis
+infection
+hookworm_infections
+infestation
+mixed_infectious_disease
+parasitic_diseases
+pulmonary_embolism

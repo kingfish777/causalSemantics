@@ -1,0 +1,4 @@
+hepatotoxicity
+hepatitis_fulminant
+adverse_effects
+melanoma
