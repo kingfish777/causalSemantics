@@ -146,6 +146,11 @@ names(randomAKI) <- columnNames
 names(randomALI) <- columnNames
 names(randomAMI) <- columnNames
 names(randomGIB) <- columnNames
+randomAKI <- randomAKI[,unique(names(randomAKI))]
+randomALI <- randomALI[,unique(names(randomALI))]
+randomAMI <- randomAMI[,unique(names(randomAMI))]
+randomGIB <- randomGIB[,unique(names(randomGIB))]
+
 randomALL <- rbind(randomAKI, randomALI, randomAMI, randomGIB)
 
 write_delim("resultsRandom-dib.tsv",x = randomALL,delim = "\t")
@@ -643,351 +648,151 @@ nrow(dat.new)
 dat.new.good <- dat.new
 dat.new <- dat
 dat.new <- dat.new.good
-
+dat.orig <- dat
+dat <- dat.new
 system("mkdir boxplots")
 
-# BASELINES
+###################
+# BOXPLOTS (literature-derived)
+###################
 
+# BASELINES (lit-derived)
 getGGBoxplotBaseline <- function(dat, hoiname) {
-  fn.tiff <- paste("boxplots/baselineBoxplot_", hoiname, ".tiff", sep = "")  
-  dat = dat.new
-  hoiname = "kidney_failure,_acute"
+  fn <- paste("boxplots/", hoiname, "_1_baselines.tiff", sep = "")  
   plotname <- paste("Baselines for ", hoiname, sep = "")
-    tiff(fn.tiff, width = 4, height = 4, units = 'in', res = 300)
-    ggboxplot(subset(dat, dat$hoiname == hoiname),# title = plotname, 
-              x = "casecontrol", y = c("ror", "medcoef0"), 
-              color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-              ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-              combine = TRUE, add = c("mean_ci", "dotplot"), 
-              fill = "light yellow", label = "exposurename",
-              label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-    dev.off()
-}
-getGGBoxplotBaseline(dat, "kidney_failure,_acute")
-getGGBoxplotBaseline(dat, "liver_failure,_acute")
-getGGBoxplotBaseline(dat, "acute_myocardial_infarction")
-getGGBoxplotBaseline(dat, "gastrointestinal_hemorrhage")
-
-
-getGGBoxplotBaseline <- function(dat, hoiname) {
-  fn.eps <- paste("boxplots/baselineBoxplot_", hoiname, ".eps", sep = "")  
-  dat = dat.new
-  hoiname = "kidney_failure,_acute"
-  plotname <- paste("Baselines for ", hoiname, sep = "")
-  #tiff(file = fn, width = 4, height = 4, units = 'in', res = 300)
-  postscript(fn.eps, res=300)
-  #postscript(fn.eps, width = 8, height = 8, 
-  #           horizontal = FALSE, onefile = FALSE, paper = "special", 
-  #           colormodel = "cmyk")#, family = "Arial")
-  #par(mar = c(3.5, 3.5, 1, 1), mgp = c(2, 0.7, 0), tck = -0.01)
-  ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
             x = "casecontrol", y = c("ror", "medcoef0"), 
             color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
             ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
             combine = TRUE, add = c("mean_ci", "dotplot"), 
             fill = "light yellow", label = "exposurename",
             label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-  # Make plot
+  plot(p)
   dev.off()
 }
+
 getGGBoxplotBaseline(dat, "kidney_failure,_acute")
 getGGBoxplotBaseline(dat, "liver_failure,_acute")
 getGGBoxplotBaseline(dat, "acute_myocardial_infarction")
 getGGBoxplotBaseline(dat, "gastrointestinal_hemorrhage")
 
-getGGBoxplotMedcoef <- function(dat, hoiname, plotname, labelname, predname) {
-  ggboxplot(subset(dat.new, dat.new$hoiname == 'kidney_failure,_acute'), title = "Baselines for kidney_failure,_acute", 
-            x = "casecontrol", y = c("ror", "medcoef0"), 
-            color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-            ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-            combine = TRUE, add = c("mean_ci", "dotplot"), 
-            fill = "light yellow", label = "exposurename",
-            label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+# RAW REGRESSION (lit-derived)
+getGGBoxplotRawcoefs <- function(dat, hoiname) {
+  fn <- paste("boxplots/", hoiname, "_2_rawcoefs.tiff", sep = "")  
+  plotname <- paste("Regression coefficients (β) using LBD for ", hoiname, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+                 x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"),
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "Exposure coefficients (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), 
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
 }
 
-getGGBoxplotATE <- function(dat, hoiname, plotname, labelname, predname) {
-  ggboxplot(subset(dat.new, dat.new$hoiname == 'kidney_failure,_acute'), title = "Baselines for kidney_failure,_acute", 
-            x = "casecontrol", y = c("ror", "medcoef0"), 
-            color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-            ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-            combine = TRUE, add = c("mean_ci", "dotplot"), 
-            fill = "light yellow", label = "exposurename",
-            label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+getGGBoxplotRawcoefs(dat, "kidney_failure,_acute")
+getGGBoxplotRawcoefs(dat, "liver_failure,_acute")
+getGGBoxplotRawcoefs(dat, "acute_myocardial_infarction")
+getGGBoxplotRawcoefs(dat, "gastrointestinal_hemorrhage")
+
+# ATE (lit-derived)
+getGGBoxplotRawATE<- function(dat, hoiname) {
+  fn <- paste("boxplots/", hoiname, "_3_ate.tiff", sep = "")  
+  plotname <- paste("Average Treatment Effect (Δ) using LBD for ", hoiname, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+                 x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "ATE (Δ)", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), 
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
 }
 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'kidney_failure,_acute'), title = "Baselines for kidney_failure,_acute", 
-          x = "casecontrol", y = c("ror", "medcoef0"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'), title = "Baselines for liver_failure,_acute", 
-          x = "casecontrol", y = c("ror", "medcoef0"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'), title = "Baselines for acute_myocardial_infarction", 
-          x = "casecontrol", y = c("ror", "medcoef0"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-ggboxplot(subset(dat.new, dat.new$hoiname == 'gastrointestinal_hemorrhage'), title = "Baselines for gastrointestinal_hemorrhage",
-          x = "casecontrol", y = c("ror", "medcoef0"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-
-
-
-# medcoef
-ggboxplot(subset(dat.new, dat.new$hoiname == 'kidney_failure,_acute'), title = "Exposure Coefficients (β) for kidney_failure,_acute",
-          x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Exposure Coefficient (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'),
-          x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Exposure Coefficient (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'),
-          x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Exposure Coefficient (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'gastrointestinal_hemorrhage'),
-          x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Exposure Coefficient (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-# ATE
-ggboxplot(subset(dat.new, dat.new$hoiname == 'kidney_failure,_acute'), title = "Average Treatment Effect (Δ) for kidney_failure,_acute",
-          x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Average Treatment Effect (ATE Δ)", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'), title = "Average Treatment Effect (Δ) for liver_failure,_acute",
-          x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Average Treatment Effect (ATE Δ)", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'), title = "Average Treatment Effect (Δ) for acute_myocardial_infarction",
-          x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Average Treatment Effect (ATE Δ)", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'gastrointestinal_hemorrhage'), title = "Average Treatment Effect (Δ) for gastrointestinal_hemorrhage",
-          x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "Average Treatment Effect (ATE Δ)", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename",
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-
-
-# 'kidney_failure,_acute'
-ggboxplot(subset(dat.new, dat.new$hoiname == 'kidney_failure,_acute'), x = "casecontrol", 
-          y = c("ror", "medcoef0"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), fill = "light yellow", 
-          label = "exposurename", label.select = list(top.up = 3, top.down = 3), 
-          font.label = list(size = 10, style = "bold", color = "black"), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'kidney_failure,_acute'), 
-          x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "coefficients", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), fill = "light yellow",
-          label = "exposurename", label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'kidney_failure,_acute'), 
-          x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "sql5ate", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename", 
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-#'liver_failure,_acute'
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'), x = "casecontrol", 
-          y = c("ror", "medcoef0"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), fill = "light yellow", 
-          label = "exposurename", label.select = list(top.up = 3, top.down = 3), 
-          font.label = list(size = 10, style = "bold", color = "black"), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'), 
-          x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "coefficients", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), fill = "light yellow",
-          label = "exposurename", label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'), 
-          x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "sql5ate", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename", 
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-
-
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'), x = "casecontrol", y = c("ror", "medcoef0"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), ylab = "medcoef1", xlab = "casecontrol", bxp.errorbar = TRUE, combine = TRUE, add = c("dotplot", "median_iqr"), fill = "light yellow", label = "exposurename", label.select = list(top.up = 1, top.down = 1)) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'), x = "casecontrol", y = c("sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), ylab = "medcoef1", xlab = "casecontrol", bxp.errorbar = TRUE, combine = TRUE, add = c("dotplot", "median_iqr"), fill = "light yellow", label = "exposurename", label.select = list(top.up = 1, top.down = 1)) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'liver_failure,_acute'), x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), ylab = "sql5ate", xlab = "casecontrol", bxp.errorbar = TRUE, combine = TRUE, add = c("dotplot", "median_iqr"), fill = "light yellow", label = "exposurename", label.select = list(top.up = 1, top.down = 1)) 
-# 'acute_myocardial_infarction'
-
-
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'), x = "casecontrol", 
-          y = c("ror", "medcoef0"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), fill = "light yellow", 
-          label = "exposurename", label.select = list(top.up = 3, top.down = 3), 
-          font.label = list(size = 10, style = "bold", color = "black"), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'), 
-          x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "coefficients", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), fill = "light yellow",
-          label = "exposurename", label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'), 
-          x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "sql5ate", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename", 
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-
-
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'), x = "casecontrol", y = c("ror", "medcoef0"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), ylab = "medcoef1", xlab = "casecontrol", bxp.errorbar = TRUE, combine = TRUE, add = c("dotplot", "median_iqr"), fill = "light yellow", label = "exposurename", label.select = list(top.up = 1, top.down = 1)) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'), x = "casecontrol", y = c("sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), ylab = "medcoef1", xlab = "casecontrol", bxp.errorbar = TRUE, combine = TRUE, add = c("dotplot", "median_iqr"), fill = "light yellow", label = "exposurename", label.select = list(top.up = 1, top.down = 1)) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction'), x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), ylab = "sql5ate", xlab = "casecontrol", bxp.errorbar = TRUE, combine = TRUE, add = c("dotplot", "median_iqr"), fill = "light yellow", label = "exposurename", label.select = list(top.up = 1, top.down = 1)) 
-# 'gastrointestinal_hemorrhage'
-
-
-
-ggboxplot(subset(dat.new, dat.new$hoiname == 'gastrointestinal_hemorrhage'), x = "casecontrol", 
-          y = c("ror"), color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), fill = "light yellow", 
-          label = "exposurename", label.select = list(top.up = 3, top.down = 3), 
-          font.label = list(size = 10, style = "bold", color = "black"), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'gastrointestinal_hemorrhage'), 
-          x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "coefficients", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), fill = "light yellow",
-          label = "exposurename", label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-ggboxplot(subset(dat.new, dat.new$hoiname == 'gastrointestinal_hemorrhage'), 
-          x = "casecontrol", y = c("sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
-          color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-          ylab = "sql5ate", xlab = "casecontrol", bxp.errorbar = TRUE, 
-          combine = TRUE, add = c("mean_ci", "dotplot"), 
-          fill = "light yellow", label = "exposurename", 
-          label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
-
-
-
-
-
-
-
-
-gib <- subset(dat.new, dat.new$hoiname == 'gastrointestinal_hemorrhage')
-gib0 <- subset(gib, gib$casecontrol == '0')
-gib1 <- subset(gib, gib$casecontrol == '1')
-gib0median <- median(gib0$psi5ate)
-subset(gib1, gib1$psi10ate > gib0median)
-nrow(gib1)
-nrow(subset(gib1, gib1$psi5ate > gib0median))
-
-gib0median <- median(gib0$ror)
-subset(gib1, gib1$ror > gib0median)
-nrow(gib1)
-nrow(subset(gib1, gib1$ror > gib0median))
-
-gib0median <- median(gib0$ror)
-subset(gib0, gib0$ror > gib0median)
-nrow(gib0)
-nrow(subset(gib0, gib0$ror > gib0median))
-
-gib0median <- median(gib0$sql5ate)
-nrow(gib0)
-nrow(subset(gib0, gib0$sql5ate > gib0median))
-
-
-
-gib <- subset(dat.new, dat.new$hoiname == 'liver_failure,_acute')
-gib0 <- subset(gib, gib$casecontrol == '0')
-gib1 <- subset(gib, gib$casecontrol == '1')
-gib0median <- median(gib0$psi5ate)
-subset(gib1, gib1$psi10ate > gib0median)
-nrow(gib1)
-nrow(subset(gib1, gib1$psi5ate > gib0median))
-
-gib0median <- median(gib0$ror)
-subset(gib1, gib1$ror > gib0median)
-nrow(gib1)
-nrow(subset(gib1, gib1$ror > gib0median))
-
-gib0median <- median(gib0$ror)
-subset(gib0, gib0$ror > gib0median)
-nrow(gib0)
-nrow(subset(gib0, gib0$ror > gib0median))
-
-gib0median <- median(gib0$sql5ate)
-nrow(gib0)
-nrow(subset(gib0, gib0$sql5ate > gib0median))
-
-gib <- subset(dat.new, dat.new$hoiname == 'acute_myocardial_infarction')
-gib0 <- subset(gib, gib$casecontrol == '0')
-gib1 <- subset(gib, gib$casecontrol == '1')
-gib0median <- median(gib0$psi5ate)
-subset(gib1, gib1$psi10ate > gib0median)
-nrow(gib1)
-nrow(subset(gib1, gib1$psi5ate > gib0median))
-
-gib0median <- median(gib0$ror)
-subset(gib1, gib1$ror > gib0median)
-nrow(gib1)
-nrow(subset(gib1, gib1$ror > gib0median))
-
-gib0median <- median(gib0$ror)
-subset(gib0, gib0$ror > gib0median)
-nrow(gib0)
-nrow(subset(gib0, gib0$ror > gib0median))
-
-
+getGGBoxplotRawATE(dat, "kidney_failure,_acute")
+getGGBoxplotRawATE(dat, "liver_failure,_acute")
+getGGBoxplotRawATE(dat, "acute_myocardial_infarction")
+getGGBoxplotRawATE(dat, "gastrointestinal_hemorrhage")
 
 ##################
 ##################
-# RANDOMLAND
+# BOXPLOTS (RANDOMLAND)
 ##################
+
+
+# BASELINES  (RANDOMLAND)
+getGGBoxplotBaseline <- function(dat, hoiname) {
+  fn <- paste("boxplots/", hoiname, "_1_baselineRand.tiff", sep = "")  
+  plotname <- paste("Baselines [random covar subset] for ", hoiname, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+                 x = "casecontrol", y = c("chisqPvalue", "medCoef0"), 
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), 
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
+}
+
+getGGBoxplotBaseline(randomAKI, "kidney_failure,_acute")
+getGGBoxplotBaseline(randomALI, "liver_failure,_acute")
+getGGBoxplotBaseline(randomAMI, "acute_myocardial_infarction")
+getGGBoxplotBaseline(randomGIB, "gastrointestinal_hemorrhage")
+
+# RAW REGRESSION  (RANDOMLAND)
+getGGBoxplotRawcoefs <- function(dat, hoiname) {
+  fn <- paste("boxplots/2_", hoiname, "_1_rawcoefsRand.tiff", sep = "")  
+  plotname <- paste("Regression coefficients (β) [random covar subset]  for ", hoiname, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+                 x = "casecontrol", y = c("medCoef0", "medCoef"), #, "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"),
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "Exposure coefficients (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), 
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
+}
+
+getGGBoxplotRawcoefs(randomAKI, "kidney_failure,_acute")
+getGGBoxplotRawcoefs(randomALI, "liver_failure,_acute")
+getGGBoxplotRawcoefs(randomAMI, "acute_myocardial_infarction")
+getGGBoxplotRawcoefs(randomGIB, "gastrointestinal_hemorrhage")
+
+# ATE  (RANDOMLAND)
+getGGBoxplotRawATE<- function(dat, hoiname) {
+  fn <- paste("boxplots/3_", hoiname, "_3_ateRand.tiff", sep = "")  
+  plotname <- paste("Average Treatment Effect (Δ)  [random covar subset] for ", hoiname, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+                 x = "casecontrol", y = c("exactATE"), 
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "ATE (Δ)", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), 
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
+}
+
+getGGBoxplotRawATE(randomAKI, "kidney_failure,_acute")
+getGGBoxplotRawATE(randomALI, "liver_failure,_acute")
+getGGBoxplotRawATE(randomAMI, "acute_myocardial_infarction")
+getGGBoxplotRawATE(randomGIB, "gastrointestinal_hemorrhage")
+
+
+
+
+
+
 
 
 ggboxplot(data.frame(randomAKI), x = "casecontrol", y = "chisqPvalue")
