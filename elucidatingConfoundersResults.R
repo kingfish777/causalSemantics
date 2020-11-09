@@ -685,7 +685,7 @@ getGGBoxplotRawcoefs <- function(dat, hoiname) {
   p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
                  x = "casecontrol", y = c("medcoef0", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"),
                  color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
-                 ylab = "Exposure coefficients (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 ylab = "Regression coefficients (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
                  combine = TRUE, add = c("mean_ci", "dotplot"), 
                  fill = "light yellow", label = "exposurename",
                  label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
@@ -748,7 +748,7 @@ getGGBoxplotBaseline(randomGIB, "gastrointestinal_hemorrhage")
 
 # RAW REGRESSION  (RANDOMLAND)
 getGGBoxplotRawcoefs <- function(dat, hoiname) {
-  fn <- paste("boxplots/2_", hoiname, "_1_rawcoefsRand.tiff", sep = "")  
+  fn <- paste("boxplots/", hoiname, "_1_rawcoefsRand.tiff", sep = "")  
   plotname <- paste("Regression coefficients (β) [random covar subset]  for ", hoiname, sep = "")
   tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
   p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
@@ -769,7 +769,7 @@ getGGBoxplotRawcoefs(randomGIB, "gastrointestinal_hemorrhage")
 
 # ATE  (RANDOMLAND)
 getGGBoxplotRawATE<- function(dat, hoiname) {
-  fn <- paste("boxplots/3_", hoiname, "_3_ateRand.tiff", sep = "")  
+  fn <- paste("boxplots/", hoiname, "_3_ateRand.tiff", sep = "")  
   plotname <- paste("Average Treatment Effect (Δ)  [random covar subset] for ", hoiname, sep = "")
   tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
   p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
@@ -789,6 +789,325 @@ getGGBoxplotRawATE(randomAMI, "acute_myocardial_infarction")
 getGGBoxplotRawATE(randomGIB, "gastrointestinal_hemorrhage")
 
 
+
+###########################
+###########################
+
+##################
+##################
+# BOXPLOTS (COMBINED)
+##################
+combinedDat.orig <- merge(x = dat, y = randomALL, by.x = c("exposurename", "hoiname", "casecontrol"), by.y = c("exposurename", "hoiname", "casecontrol"))
+
+combinedDat <- combinedDat.orig
+combinedDat$ror <- remove_outliers(combinedDat$ror)
+combinedDat$ror <- remove_outliers(combinedDat$medCoef0)
+combinedDat <- na.omit(combinedDat)
+# BASELINES  (combined)
+getGGBoxplotBaseline <- function(dat, hoiname) {
+  fn <- paste("boxplots/", hoiname, "_1_baselineCombined.tiff", sep = "")  
+  plotname <- paste("Baselines [combined] for ", hoiname, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+                 x = "casecontrol", y = c("ror", "medCoef0"), 
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "Baselines", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), 
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
+}
+
+getGGBoxplotBaseline(combinedDat, "kidney_failure,_acute")
+getGGBoxplotBaseline(combinedDat, "liver_failure,_acute")
+getGGBoxplotBaseline(combinedDat, "acute_myocardial_infarction")
+getGGBoxplotBaseline(combinedDat, "gastrointestinal_hemorrhage")
+
+
+combinedDat <- combinedDat.orig
+combinedDat$medCoef0 <- remove_outliers(combinedDat$medCoef0)
+combinedDat$medCoef <- remove_outliers(combinedDat$medCoef)
+combinedDat$sql5medcoef1 <- remove_outliers(combinedDat$sql5medcoef1)
+combinedDat$sql10medcoef1 <- remove_outliers(combinedDat$sql10medcoef1)
+combinedDat$psi5medcoef1 <- remove_outliers(combinedDat$psi5medcoef1)
+combinedDat$psi10medcoef1 <- remove_outliers(combinedDat$psi10medcoef1)
+combinedDat <- na.omit(combinedDat)
+
+# RAW REGRESSION  (combined)
+getGGBoxplotRawcoefs <- function(dat, hoiname) {
+  fn <- paste("boxplots/", hoiname, "_1_rawcoefsCombined.tiff", sep = "")  
+  plotname <- paste("Regression coefficients (β) [combined]  for ", hoiname, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+                 x = "casecontrol", y = c("medCoef0", "medCoef", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), #, "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"),
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "Exposure coefficients (β)", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), 
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
+}
+
+getGGBoxplotRawcoefs(combinedDat, "kidney_failure,_acute")
+getGGBoxplotRawcoefs(combinedDat, "liver_failure,_acute")
+getGGBoxplotRawcoefs(combinedDat, "acute_myocardial_infarction")
+getGGBoxplotRawcoefs(combinedDat, "gastrointestinal_hemorrhage")
+
+# ATE  (combined)
+combinedDat <- combinedDat.orig
+#combinedDat$ <- remove_outliers(combinedDat$medCoef0)
+combinedDat$exactATE <- remove_outliers(combinedDat$medCoef)
+combinedDat$exactATE <- combinedDat$exactATE/500
+combinedDat$sql5ate <- remove_outliers(combinedDat$sql5ate)
+combinedDat$sql10ate <- remove_outliers(combinedDat$sql10ate)
+combinedDat$psi5ate <- remove_outliers(combinedDat$psi5ate)
+combinedDat$psi10ate <- remove_outliers(combinedDat$psi10ate)
+combinedDat <- na.omit(combinedDat)
+
+getGGBoxplotRawATE<- function(dat, hoiname) {
+  fn <- paste("boxplots/", hoiname, "_3_ateCombined.tiff", sep = "")  
+  plotname <- paste("Average Treatment Effect (Δ)  [combined] for ", hoiname, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
+                 x = "casecontrol", y = c("exactATE", "sql5ate", "sql10ate", "psi5ate", "psi10ate"), 
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "ATE (Δ)", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), 
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
+}
+
+getGGBoxplotRawATE(combinedDat, "kidney_failure,_acute")
+getGGBoxplotRawATE(combinedDat, "liver_failure,_acute")
+getGGBoxplotRawATE(combinedDat, "acute_myocardial_infarction")
+getGGBoxplotRawATE(combinedDat, "gastrointestinal_hemorrhage")
+
+combinedDat <- combinedDat.orig
+combinedDat$sql5medcoef1 <- remove_outliers(combinedDat$sql5medcoef1)
+combinedDat$sql10medcoef1 <- remove_outliers(combinedDat$sql10medcoef1)
+combinedDat$psi5medcoef1 <- remove_outliers(combinedDat$psi5medcoef1)
+combinedDat$psi10medcoef1 <- remove_outliers(combinedDat$psi10medcoef1)
+combinedDat <- na.omit(combinedDat)
+combinedDat$coefDiffRandom <- combinedDat$medCoef0 - combinedDat$medCoef
+combinedDat$coefDiffsql5 <- combinedDat$medCoef0 - combinedDat$sql5medcoef1
+combinedDat$coefDiffsql10 <- combinedDat$medCoef0 - combinedDat$sql10medcoef1
+combinedDat$coefDiffpsi5 <- combinedDat$medCoef0 - combinedDat$psi5medcoef1
+combinedDat$coefDiffpsi10 <- combinedDat$medCoef0 - combinedDat$psi10medcoef1
+
+getGGBoxplotRawATE<- function(dat, hoi) {
+  fn <- paste("boxplots/", hoi, "_4_coefDiff.tiff", sep = "")  
+  plotname <- paste("Difference in β [combinedCoefDiff] for ", hoi, sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  p <- ggboxplot(subset(dat, dat$hoiname == hoi), title = plotname, 
+                 x = "casecontrol", y = c("coefDiffRandom", "coefDiffsql5", "coefDiffsql10", "coefDiffpsi5", "coefDiffpsi10"), 
+                 color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
+                 ylab = "Difference in β", xlab = "casecontrol", bxp.errorbar = TRUE, 
+                 combine = TRUE, add = c("mean_ci", "dotplot"), font.label = 5,
+                 fill = "light yellow", label = "exposurename",
+                 label.select = list(top.up = 3, top.down = 3), repel = TRUE) 
+  plot(p)
+  dev.off()
+}
+
+getGGBoxplotRawATE(combinedDat, "kidney_failure,_acute")
+getGGBoxplotRawATE(combinedDat, "liver_failure,_acute")
+getGGBoxplotRawATE(combinedDat, "acute_myocardial_infarction")
+getGGBoxplotRawATE(combinedDat, "gastrointestinal_hemorrhage")
+
+
+#c("coefDiffRandom", "coefDiffsql5", "coefDiffsql10", "coefDiffpsi5", "coefDiffpsi10"), 
+
+aggAuc2 <- function(hoi, dat) {
+  dat <- subset(dat, hoiname == hoi)
+  aucRor <- getStats(as.numeric(dat$ror), dat$casecontrol)
+  aucChisq <- getStats(as.numeric(dat$chisq), dat$casecontrol)
+  aucMedcoef0 <- getStats(as.numeric(dat$medcoef0), dat$casecontrol)
+  #getStats(as.numeric(dat$medcoef0))
+  aucCoefDiffRandom <- getStats(as.numeric(dat$coefDiffRandom), dat$casecontrol)
+  aucCoefDiffSql5 <-
+    getStats(as.numeric(dat$coefDiffsql5), dat$casecontrol)
+  aucCoefDiffPsi5 <-
+    getStats(as.numeric(dat$coefDiffpsi5), dat$casecontrol)
+  aucCoefDiffSql10 <-
+    getStats(as.numeric(dat$coefDiffsql10), dat$casecontrol)
+  aucCoefDiffPsi10 <-
+    getStats(as.numeric(dat$coefDiffpsi10), dat$casecontrol)
+  nrowDat <- nrow(dat)
+  out <-
+    c(
+      hoi,
+      aucChisq,
+      aucRor,
+      aucMedcoef0,
+      aucCoefDiffRandom,
+      aucCoefDiffSql5,
+      aucCoefDiffPsi5,
+      aucCoefDiffSql10,
+      aucCoefDiffPsi10,
+      nrowDat
+    )
+  out
+}
+
+aggAuc2("kidney_failure,_acute", combinedDat)
+aggAuc2("liver_failure,_acute", combinedDat)
+aggAuc2("acute_myocardial_infarction", combinedDat)
+aggAuc2("gastrointestinal_hemorrhage", combinedDat)
+
+
+
+
+aggAuc2 <- function(dat) {
+  #dat <- subset(dat, hoiname == hoi)
+  aucRor <- getStats(as.numeric(dat$ror), dat$casecontrol)
+  aucChisq <- getStats(as.numeric(dat$chisq), dat$casecontrol)
+  aucMedcoef0 <- getStats(as.numeric(dat$medcoef0), dat$casecontrol)
+  #getStats(as.numeric(dat$medcoef0))
+  aucCoefDiffRandom <- getStats(as.numeric(dat$coefDiffRandom), dat$casecontrol)
+  aucCoefDiffSql5 <-
+    getStats(as.numeric(dat$coefDiffsql5), dat$casecontrol)
+  aucCoefDiffPsi5 <-
+    getStats(as.numeric(dat$coefDiffpsi5), dat$casecontrol)
+  aucCoefDiffSql10 <-
+    getStats(as.numeric(dat$coefDiffsql10), dat$casecontrol)
+  aucCoefDiffPsi10 <-
+    getStats(as.numeric(dat$coefDiffpsi10), dat$casecontrol)
+  nrowDat <- nrow(dat)
+  out <-
+    c(
+      #hoi,
+      aucChisq,
+      aucRor,
+      aucMedcoef0,
+      aucCoefDiffRandom,
+      aucCoefDiffSql5,
+      aucCoefDiffSql10,
+      aucCoefDiffPsi5,
+      aucCoefDiffPsi10,
+      nrowDat
+    )
+  out
+}
+
+aggAuc2(combinedDat)
+aggAuc2("liver_failure,_acute", combinedDat)
+aggAuc2("acute_myocardial_infarction", combinedDat)
+aggAuc2("gastrointestinal_hemorrhage", combinedDat)
+
+#c("coefDiffRandom", "coefDiffsql5", "coefDiffsql10", "coefDiffpsi5", "coefDiffpsi10"),
+#baselineColor <- "#663500"; glmColor <- "#63a11b"; gcmColor <- "#ff845d" # https://medialab.github.io/iwanthue/
+
+drawCombinedDiffAUC <- function(combinedDat, hoi) {
+  combinedDat <- subset(combinedDat, hoiname == hoi)
+  baselineColor <- "#495100" # dark green
+  randomColor <-  "#590035" # dark purple
+  sql5Color <- "#dbd976" # light yellowish green
+  sql10Color <-  "#b453c4" # light purple
+  psi5Color <-  "#e5c57d" # puke yellow
+  psi10Color <-  "#ff736e" # orange/pink
+  fn <- paste(hoi, "_aucCombinedDIFF.tiff", sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  plot(roc(combinedDat$casecontrol, combinedDat$ror, smooth = FALSE, ci = TRUE, algorithm = 4), print.auc = TRUE, col = baselineColor, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$coefDiffRandom, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+                         col = randomColor, print.auc.y = .4, add = TRUE, colorize = FALSE, pch=18, type = "b")
+  plot(roc(combinedDat$casecontrol, combinedDat$coefDiffsql5, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+     col = sql5Color, print.auc.y = .3, add = TRUE, colorize = TRUE)
+
+  plot(roc(combinedDat$casecontrol, combinedDat$coefDiffsql10, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+     col = sql10Color, print.auc.y = .2, add = TRUE, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$coefDiffpsi5, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+     col = psi5Color, print.auc.y = .1, add = TRUE, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$coefDiffpsi10, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+                        col = psi10Color, print.auc.y = .0, add = TRUE, colorize = TRUE, pch=10, type = "b")
+#  lines(combinedDat$coefDiffpsi10, y2, pch=18, col="blue", type="b", lty=2)
+  legendColors <- c("#495100", "#590035", "#dbd976", "#b453c4", "#e5c57d", "#ff736e")
+  legendLabels <- c("baseline", "randomCovariates", "sql5", "sql10", "psi5", "psi10")
+  legend(1, 95, legend=legendLabels,
+         col=legendColors, lty=1:2, cex=0.8)
+  
+  dev.off()
+}
+
+
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "kidney_failure,_acute")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "liver_failure,_acute")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "acute_myocardial_infarction")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "gastrointestinal_hemorrhage")
+
+
+
+
+drawCombinedDiffAUC <- function(combinedDat, hoi) {
+  combinedDat <- subset(combinedDat, hoiname == hoi)
+  baselineColor <- "#495100" # dark green
+  randomColor <-  "#590035" # dark purple
+  psi10Color <-  "#ff736e" # orange/pink
+  fn <- paste("randomDiffs/", hoi, "_aucCombinedDIFF.tiff", sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  plot(roc(combinedDat$casecontrol, combinedDat$ror, smooth = FALSE, ci = TRUE, algorithm = 4), print.auc = TRUE, col = baselineColor, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$coefDiffRandom, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+       col = randomColor, print.auc.y = .4, add = TRUE, colorize = FALSE, pch=18, type = "b")
+  #plot(roc(combinedDat$casecontrol, combinedDat$coefDiffsql5, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+  #     col = sql5Color, print.auc.y = .3, add = TRUE, colorize = TRUE)
+  #plot(roc(combinedDat$casecontrol, combinedDat$coefDiffsql10, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+  #     col = sql10Color, print.auc.y = .2, add = TRUE, colorize = TRUE)
+  #plot(roc(combinedDat$casecontrol, combinedDat$coefDiffpsi5, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+  #     col = psi5Color, print.auc.y = .1, add = TRUE, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$coefDiffpsi10, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+       col = psi10Color, print.auc.y = .3, add = TRUE, colorize = TRUE, pch=10, type = "b")
+  #  lines(combinedDat$coefDiffpsi10, y2, pch=18, col="blue", type="b", lty=2)
+  legendColors <- c("#495100", "#590035", "#ff736e")
+  legendLabels <- c("baseline", "randomCovariates", "psi10")
+  legend(1, 95, legend=legendLabels,
+         col=legendColors, lty=1:2, cex=0.8)
+  
+  dev.off()
+}
+
+
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "kidney_failure,_acute")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "liver_failure,_acute")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "acute_myocardial_infarction")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "gastrointestinal_hemorrhage")
+
+
+
+drawCombinedDiffAUC <- function(combinedDat) {
+  #combinedDat <- subset(combinedDat, hoiname == hoi)
+  baselineColor <- "#495100" # dark green
+  randomColor <-  "#590035" # dark purple
+  psi10Color <-  "#ff736e" # orange/pink
+  fn <- paste("all", "_aucCombinedDIFF.tiff", sep = "")
+  tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
+  plot(roc(combinedDat$casecontrol, combinedDat$ror, smooth = FALSE, ci = TRUE, algorithm = 4), print.auc = TRUE, col = baselineColor, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$exactATE, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+       col = randomColor, print.auc.y = .4, add = TRUE, colorize = FALSE, pch=18, type = "b")
+  plot(roc(combinedDat$casecontrol, combinedDat$sql5medcoef1, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+       col = sql5Color, print.auc.y = .3, add = TRUE, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$sql10medcoef1, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+       col = sql10Color, print.auc.y = .2, add = TRUE, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$psi5medcoef1, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+       col = psi5Color, print.auc.y = .1, add = TRUE, colorize = TRUE)
+  plot(roc(combinedDat$casecontrol, combinedDat$psi10medcoef1, ci = TRUE, algorithm = 4, smooth = FALSE), print.auc = TRUE,
+       col = psi10Color, print.auc.y = .0, add = TRUE, colorize = TRUE, pch=10, type = "b")
+  #  lines(combinedDat$coefDiffpsi10, y2, pch=18, col="blue", type="b", lty=2)
+  #legendColors <- c("#495100", "#590035", "#ff736e")
+  #legendLabels <- c("baseline", "randomCovariates", "psi10")
+  #legend(1, 95, legend=legendLabels,
+  #       col=legendColors, lty=1:2, cex=0.8)
+  
+  dev.off()
+}
+
+
+drawCombinedDiffAUC(combinedDat = combinedDat)#, hoi = "kidney_failure,_acute")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "liver_failure,_acute")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "acute_myocardial_infarction")
+drawCombinedDiffAUC(combinedDat = combinedDat, hoi = "gastrointestinal_hemorrhage")
 
 
 
