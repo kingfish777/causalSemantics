@@ -837,7 +837,7 @@ combinedDat <- na.omit(combinedDat)
 # RAW REGRESSION  (combined)
 getGGBoxplotRawcoefs <- function(dat, hoiname) {
   fn <- paste("boxplots/", hoiname, "_1_rawcoefsCombined.tiff", sep = "")  
-  plotname <- paste("Regression coefficients (β) [combined]  for ", "GIB", sep = "")
+  plotname <- paste("Regression coefficients (β) [combined]  for ", hoiname, sep = "")
   tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
   p <- ggboxplot(subset(dat, dat$hoiname == hoiname), title = plotname, 
                  x = "casecontrol", y =  c("medCoef0", "medCoef", "sql5medcoef1", "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"), #, "sql10medcoef1", "psi5medcoef1", "psi10medcoef1"),
@@ -900,10 +900,10 @@ combinedDat$coefDiffpsi10 <- combinedDat$medCoef0 - combinedDat$psi10medcoef1
 
 getGGBoxplotRawATE<- function(dat, hoi) {
   fn <- paste("boxplots/", hoi, "_4_coefDiff.tiff", sep = "")  
-  plotname <- paste("Difference in β [combinedCoefDiff] for ", "GIB", sep = "")
+  plotname <- paste("Difference in β [combinedCoefDiff] for ", hoiname, sep = "")
   tiff(file = fn, height = 12, width = 17, units = 'cm', compression = "lzw", res = 300)
   p <- ggboxplot(subset(dat, dat$hoiname == hoi), title = plotname, 
-                 x = "casecontrol", y = c("coefDiffRandom", "coefDiffsql5", "coefDiffpsi10"), # c("coefDiffRandom", "coefDiffsql5", "coefDiffsql10", "coefDiffpsi5", "coefDiffpsi10"), 
+                 x = "casecontrol", y = c("coefDiffRandom", "coefDiffsql5", "coefDiffsql10", "coefDiffpsi5", "coefDiffpsi10"), 
                  color = "casecontrol", palette = c("#00AFBB", "#E7B800"), 
                  ylab = "Difference in β", xlab = "casecontrol", bxp.errorbar = TRUE, 
                  combine = TRUE, add = c("mean_ci", "dotplot"), font.label = 5,
