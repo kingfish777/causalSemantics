@@ -12,7 +12,7 @@ library(utils)
 library(compiler)
 library(tmle)
 library(gRain)
-setwd("/home/smalec/Projects/ea")
+setwd("~/Projects/enlil")
 source("helperFunctions.R")
 # setwd("/Users/smalec/Projects/confounders")
 
